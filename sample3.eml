@@ -1,0 +1,39 @@
+import imaplib, email, os, subprocess
+
+EMAIL = "ankit580243@gmail.com"
+PASSWORD = "#Ankit142004"  # Generated App Password
+IMAP_SERVER = "imap.gmail.com"
+FETCH_COUNT = 1  # Number of latest emails to fetch
+
+os.makedirs("emails", exist_ok=True)
+
+def download_emails(count):
+    mail = imaplib.IMAP4_SSL(IMAP_SERVER)
+    mail.login(EMAIL, PASSWORD)
+    mail.select("inbox")
+    status, data = mail.search(None, "UNSEEN")  # Only new mails
+    ids = data[0].split()
+    if not ids:
+        print("No new emails to analyze.")
+        return []
+    selected = ids[-count:]
+    paths = []
+    for num in selected:
+        typ, msg_data = mail.fetch(num, "(RFC822)")
+        raw = msg_data[0][1]
+        path = f"emails/email_{num.decode()}.eml"
+        with open(path, "wb") as f:
+            f.write(raw)
+        paths.append(path)
+        print(f"Downloaded: {path}")
+    mail.logout()
+    return paths
+
+if __name__ == "__main__":
+    files = download_emails(FETCH_COUNT)
+    for eml in files:
+        out = eml.replace(".eml", "_report.txt")
+        print(f"\nRunning PhishEye on {eml}...\n")
+        subprocess.run(["python3", "phisheye.py", "-i", eml, "-o", out])
+        print("\n🔎 Report Preview:\n")
+        subprocess.run(["head", "-n", "30", out])

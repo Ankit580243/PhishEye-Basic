@@ -1,0 +1,12 @@
+From: "PayPal Support" <support@paypal-security.com>
+To: user@example.com
+Subject: Your account has been locked!
+
+This is an HTML formatted email:
+<html>
+<body>
+<p>Dear customer,</p>
+<p>Your PayPal account has been locked due to suspicious activity.<br>
+Please <a href="http://paypal-security.com/verify">click here</a> to verify now!</p>
+</body>
+</html>

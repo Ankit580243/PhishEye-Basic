@@ -1,0 +1,17 @@
+===== PhishEye Report =====
+
+[Headers]
+From: None
+To: None
+Subject: None
+Reply-To: None
+Return-Path: None
+Authentication-Results: None
+
+[Links]
+
+[Mismatched Links]
+
+[Flagged Attachments]
+
+===== End of Report =====

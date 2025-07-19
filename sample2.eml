@@ -1,0 +1,15 @@
+import imaplib
+import email
+
+# Connect to Gmail IMAP
+mail = imaplib.IMAP4_SSL("imap.gmail.com")
+mail.login("ankit580243@gmail.com", "#Ankit142004")  # use app password here
+
+mail.select("inbox")  # Open the inbox
+
+# Search for all emails
+status, messages = mail.search(None, "ALL")
+print("Email IDs:", messages)
+
+mail.logout()
+
