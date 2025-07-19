@@ -1,0 +1,5 @@
+echo "email
+imaplib
+subprocess
+os
+" > requirements.txt
